@@ -1,237 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
-    <body>
-        <div class="flex gap-4 w-full">
-            <div class="relative w-3/12 mb-3">
-                <label
-                    for=""
-                    class="block uppercase text-gray-600 text-xs font-semibold mb-2"
-                    >Exam Code</label
-                >
-                <input
-                    type="text"
-                    data-type="examCode"
-                    placeholder="Type Exam Code"
-                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-gray-500 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    onfocus="showDropdown(this, 'examCode')"
-                    oninput="filterDropdown(this, 'examCode')"
-                    name="exam_code"
-                    value="{{ request()->get('exam_code') }}"
-                />
-                <ul
-                    data-type="dropdown"
-                    class="hidden absolute left-0 right-0 bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-10"
-                ></ul>
-            </div>
-            <div class="relative w-4/12 mb-3">
-                <label
-                    for="Vendor"
-                    class="block uppercase text-gray-600 text-xs font-semibold mb-2"
-                    >Vendor</label
-                >
-                <input
-                    type="text"
-                    data-type="vendor"
-                    placeholder="Select Vendor"
-                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-gray-500 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    onfocus="showDropdown(this, 'vendor')"
-                    oninput="filterDropdown(this, 'vendor')"
-                    name="vendor"
-                    value="{{ request()->get('vendor') }}"
-                />
-                <ul
-                    data-type="dropdown"
-                    class="hidden absolute left-0 right-0 bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-10"
-                ></ul>
-            </div>
-            <div class="relative w-5/12 mb-3">
-                <label
-                    for="Exam Name"
-                    class="block uppercase text-gray-600 text-xs font-semibold mb-2"
-                    >Exam Name</label
-                >
-                <input
-                    type="text"
-                    data-type="examName"
-                    placeholder="Select Exam Name"
-                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-gray-500 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    onfocus="showDropdown(this, 'examName')"
-                    oninput="filterDropdown(this, 'examName')"
-                    name="exam_name"
-                    value="{{ request()->get('exam_name') }}"
-                />
-                <ul
-                    data-type="dropdown"
-                    class="hidden absolute left-0 right-0 bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-10"
-                ></ul>
-            </div>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="flex gap-4 w-full">
+      <div class="relative w-3/12 mb-3">
+        <label
+          for=""
+          class="block uppercase text-gray-600 text-xs font-semibold mb-2"
+          >Exam Code</label
+        >
+        <input
+          type="text"
+          data-type="examCode"
+          placeholder="Type Exam Code"
+          class="border-0 px-3 py-3 placeholder-blueGray-300 text-gray-500 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+          onfocus="showDropdown(this, 'examCode')"
+          oninput="filterDropdown(this, 'examCode')"
+          name="exam_code"
+          value=""
+        />
+        <ul
+          data-type="dropdown"
+          class="hidden absolute left-0 right-0 bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-10"
+        ></ul>
+      </div>
+      <div class="relative w-4/12 mb-3">
+        <label
+          for="Vendor"
+          class="block uppercase text-gray-600 text-xs font-semibold mb-2"
+          >Vendor</label
+        >
+        <input
+          type="text"
+          data-type="vendor"
+          placeholder="Select Vendor"
+          class="border-0 px-3 py-3 placeholder-blueGray-300 text-gray-500 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+          onfocus="showDropdown(this, 'vendor')"
+          oninput="filterDropdown(this, 'vendor')"
+          name="vendor"
+          value=""
+        />
+        <ul
+          data-type="dropdown"
+          class="hidden absolute left-0 right-0 bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-10"
+        ></ul>
+      </div>
+      <div class="relative w-5/12 mb-3">
+        <label
+          for="Exam Name"
+          class="block uppercase text-gray-600 text-xs font-semibold mb-2"
+          >Exam Name</label
+        >
+        <input
+          type="text"
+          data-type="examName"
+          placeholder="Select Exam Name"
+          class="border-0 px-3 py-3 placeholder-blueGray-300 text-gray-500 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+          onfocus="showDropdown(this, 'examName')"
+          oninput="filterDropdown(this, 'examName')"
+          name="exam_name"
+          value=""
+        />
+        <ul
+          data-type="dropdown"
+          class="hidden absolute left-0 right-0 bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-10"
+        ></ul>
+      </div>
+    </div>
 
-        <script>
-            let data = [];
-            let companyData = [];
+    <script>
+      let data = [
+        {
+          vendor: "Microsoft",
+          exam_name: "Designing and Implementing a Microsoft Azure AI Solution",
+          exam_code: "AI-102",
+        },
+        {
+          vendor: "Microsoft",
+          exam_name: "Microsoft Azure AI Fundamentals",
+          exam_code: "AI-900",
+        },
+        {
+          vendor: "Microsoft",
+          exam_name: "Microsoft Azure Administrator",
+          exam_code: "AZ-104",
+        },
+      ];
 
-            async function loadData() {
-                const response = await fetch(`${baseUrl}/api/exams`);
-                data = await response.json();
+      loadData();
+
+      // Display dropdown and populate based on type
+      function showDropdown(input, type) {
+        const dropdown = input
+          .closest("div")
+          .querySelector('ul[data-type="dropdown"]');
+        dropdown.classList.remove("hidden"); // Always show dropdown on focus
+
+        let items = [];
+
+        if (type === "examCode") {
+          items = [...new Set(data.map((item) => item.exam_code))].filter(
+            (item) => item !== null
+          );
+        } else if (type === "vendor") {
+          items = [...new Set(data.map((item) => item.vendor))];
+        } else if (type === "examName") {
+          const selectedVendor = input
+            .closest(".flex")
+            .querySelector('input[data-type="vendor"]').value;
+          items = data
+            .filter((item) => item.vendor === selectedVendor)
+            .map((item) => item.exam_name);
+        } else if (type === "companyName") {
+          items = [...new Set(companyData.map((item) => item.company_name))];
+        }
+
+        populateDropdown(dropdown, items, type);
+      }
+
+      // Populate the dropdown with items
+      function populateDropdown(dropdown, items, type) {
+        dropdown.innerHTML = items
+          .map(
+            (item) =>
+              `<li><a href="#" onclick="selectItem('${item}', '${type}', this); event.preventDefault();" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">${item}</a></li>`
+          )
+          .join("");
+      }
+
+      // Filter dropdown based on user input
+      function filterDropdown(input, type) {
+        const dropdown = input
+          .closest("div")
+          .querySelector('ul[data-type="dropdown"]');
+        const value = input.value.toLowerCase();
+
+        if (value || input === document.activeElement) {
+          dropdown.classList.remove("hidden"); // Show dropdown when user starts typing or if the input is focused
+        }
+
+        let filteredItems = [];
+
+        if (type === "examCode") {
+          filteredItems = data
+            .filter((item) => item.exam_code.toLowerCase().includes(value))
+            .map((item) => item.exam_code);
+        } else if (type === "vendor") {
+          filteredItems = data
+            .filter((item) => item.vendor.toLowerCase().includes(value))
+            .map((item) => item.vendor);
+        } else if (type === "examName") {
+          const selectedVendor = input
+            .closest(".flex")
+            .querySelector('input[data-type="vendor"]').value;
+          filteredItems = data
+            .filter(
+              (item) =>
+                item.vendor === selectedVendor &&
+                item.exam_name.toLowerCase().includes(value)
+            )
+            .map((item) => item.exam_name);
+        } else if (type === "companyName") {
+          filteredItems = companyData
+            .filter((item) => item.company_name.toLowerCase().includes(value))
+            .map((item) => item.company_name);
+        }
+
+        populateDropdown(dropdown, [...new Set(filteredItems)], type);
+      }
+
+      // Handle dropdown item selection
+      function selectItem(value, type, element) {
+        const input = element
+          .closest("div")
+          .querySelector(`input[data-type="${type}"]`);
+        input.value = value;
+        element.closest('ul[data-type="dropdown"]').classList.add("hidden"); // Hide dropdown
+
+        if (type === "examCode") {
+          const selectedItem = data.find((item) => item.exam_code === value);
+          if (selectedItem) {
+            input
+              .closest(".flex")
+              .querySelector('input[data-type="vendor"]').value =
+              selectedItem.vendor;
+            input
+              .closest(".flex")
+              .querySelector('input[data-type="examName"]').value =
+              selectedItem.exam_name;
+          }
+        } else if (type === "vendor") {
+          input
+            .closest(".flex")
+            .querySelector('input[data-type="examName"]').value = "";
+          showDropdown(
+            input.closest(".flex").querySelector('input[data-type="examName"]'),
+            "examName"
+          );
+        }
+      }
+
+      // Hide dropdown when clicking outside
+      document.addEventListener("click", function (event) {
+        document
+          .querySelectorAll('[data-type="dropdown"]')
+          .forEach((dropdown) => {
+            if (
+              !dropdown.contains(event.target) &&
+              !dropdown.previousElementSibling.contains(event.target)
+            ) {
+              dropdown.classList.add("hidden");
             }
-            async function loadCompanyData() {
-                const response = await fetch(`${baseUrl}/api/companies`);
-                companyData = await response.json();
-            }
-
-            loadData();
-            loadCompanyData();
-
-            // Display dropdown and populate based on type
-            function showDropdown(input, type) {
-                const dropdown = input
-                    .closest("div")
-                    .querySelector('ul[data-type="dropdown"]');
-                dropdown.classList.remove("hidden"); // Always show dropdown on focus
-
-                let items = [];
-
-                if (type === "examCode") {
-                    items = [
-                        ...new Set(data.map((item) => item.exam_code)),
-                    ].filter((item) => item !== null);
-                } else if (type === "vendor") {
-                    items = [...new Set(data.map((item) => item.vendor))];
-                } else if (type === "examName") {
-                    const selectedVendor = input
-                        .closest(".flex")
-                        .querySelector('input[data-type="vendor"]').value;
-                    items = data
-                        .filter((item) => item.vendor === selectedVendor)
-                        .map((item) => item.exam_name);
-                } else if (type === "companyName") {
-                    items = [
-                        ...new Set(
-                            companyData.map((item) => item.company_name)
-                        ),
-                    ];
-                }
-
-                populateDropdown(dropdown, items, type);
-            }
-
-            // Populate the dropdown with items
-            function populateDropdown(dropdown, items, type) {
-                dropdown.innerHTML = items
-                    .map(
-                        (item) =>
-                            `<li><a href="#" onclick="selectItem('${item}', '${type}', this); event.preventDefault();" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">${item}</a></li>`
-                    )
-                    .join("");
-            }
-
-            // Filter dropdown based on user input
-            function filterDropdown(input, type) {
-                const dropdown = input
-                    .closest("div")
-                    .querySelector('ul[data-type="dropdown"]');
-                const value = input.value.toLowerCase();
-
-                if (value || input === document.activeElement) {
-                    dropdown.classList.remove("hidden"); // Show dropdown when user starts typing or if the input is focused
-                }
-
-                let filteredItems = [];
-
-                if (type === "examCode") {
-                    filteredItems = data
-                        .filter((item) =>
-                            item.exam_code.toLowerCase().includes(value)
-                        )
-                        .map((item) => item.exam_code);
-                } else if (type === "vendor") {
-                    filteredItems = data
-                        .filter((item) =>
-                            item.vendor.toLowerCase().includes(value)
-                        )
-                        .map((item) => item.vendor);
-                } else if (type === "examName") {
-                    const selectedVendor = input
-                        .closest(".flex")
-                        .querySelector('input[data-type="vendor"]').value;
-                    filteredItems = data
-                        .filter(
-                            (item) =>
-                                item.vendor === selectedVendor &&
-                                item.exam_name.toLowerCase().includes(value)
-                        )
-                        .map((item) => item.exam_name);
-                } else if (type === "companyName") {
-                    filteredItems = companyData
-                        .filter((item) =>
-                            item.company_name.toLowerCase().includes(value)
-                        )
-                        .map((item) => item.company_name);
-                }
-
-                populateDropdown(dropdown, [...new Set(filteredItems)], type);
-            }
-
-            // Handle dropdown item selection
-            function selectItem(value, type, element) {
-                const input = element
-                    .closest("div")
-                    .querySelector(`input[data-type="${type}"]`);
-                input.value = value;
-                element
-                    .closest('ul[data-type="dropdown"]')
-                    .classList.add("hidden"); // Hide dropdown
-
-                if (type === "examCode") {
-                    const selectedItem = data.find(
-                        (item) => item.exam_code === value
-                    );
-                    if (selectedItem) {
-                        input
-                            .closest(".flex")
-                            .querySelector('input[data-type="vendor"]').value =
-                            selectedItem.vendor;
-                        input
-                            .closest(".flex")
-                            .querySelector(
-                                'input[data-type="examName"]'
-                            ).value = selectedItem.exam_name;
-                    }
-                } else if (type === "vendor") {
-                    input
-                        .closest(".flex")
-                        .querySelector('input[data-type="examName"]').value =
-                        "";
-                    showDropdown(
-                        input
-                            .closest(".flex")
-                            .querySelector('input[data-type="examName"]'),
-                        "examName"
-                    );
-                }
-            }
-
-            // Hide dropdown when clicking outside
-            document.addEventListener("click", function (event) {
-                document
-                    .querySelectorAll('[data-type="dropdown"]')
-                    .forEach((dropdown) => {
-                        if (
-                            !dropdown.contains(event.target) &&
-                            !dropdown.previousElementSibling.contains(
-                                event.target
-                            )
-                        ) {
-                            dropdown.classList.add("hidden");
-                        }
-                    });
-            });
-        </script>
-    </body>
+          });
+      });
+    </script>
+  </body>
 </html>
